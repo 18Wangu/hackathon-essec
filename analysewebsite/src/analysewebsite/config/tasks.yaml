@@ -1,0 +1,18 @@
+# tasks.yaml
+research_task:
+  description: >
+    Analyze the website at {website_url} for security vulnerabilities and potential phishing signs.
+    Provide a summary of findings with detailed security observations.
+  expected_output: >
+    A bullet-point list summarizing the website’s security aspects, vulnerabilities, and phishing indicators.
+  agent: security_researcher
+
+reporting_task:
+  description: >
+    Using the research data, compile a detailed report on the website's security.
+    The report should include sections on strengths, vulnerabilities, phishing indicators, and an overall safety evaluation.
+  expected_output: >
+    A complete report formatted in markdown detailing the website's security status with actionable recommendations.
+  agent: security_reporter
+  output_file: report.md
+
