@@ -36,7 +36,7 @@ export default function Home() {
                 className="w-full py-4 px-6 bg-primary text-primary-foreground rounded-xl hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
               >
                 <Camera className="w-5 h-5" />
-                Start Scanning
+                Start Scanning QR Code
               </button>
             )}
 
