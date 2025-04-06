@@ -109,7 +109,7 @@ Si l'URL respecte toutes ces normes, réponds URL OK, sinon URL suspecte, suivi 
     return data.choices[0].message.content || "Réponse vide.";
   } catch (error: any) {
     console.error("Erreur lors de l'appel à mistral :", error);
-    return "Erreur de communication avec mistral.";
+    return "Erreur de communication avec Mistral.";
   }
 }
 
@@ -138,7 +138,7 @@ async function synthesizeSummaries(summary1: string, summary2: string): Promise<
     });
   
     if (!response.ok) {
-      console.error("Erreur réponse API Mistral lors de la synthèse :", response.status, response.statusText);
+      console.error("Erreur réponse API Mistral lors de la synthèse:", response.status, response.statusText);
       throw new Error("Erreur API Mistral lors de la synthèse");
     }
     const data = await response.json();
