@@ -25,6 +25,3 @@ SafeQR est une application fullstack capable d’analyser les URLs extraites de 
 - **Git** : pour la gestion de version
 
 ---
-
-## 📁 Structure du projet
-

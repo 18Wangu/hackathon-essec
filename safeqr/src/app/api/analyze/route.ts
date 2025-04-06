@@ -70,15 +70,15 @@ export async function POST(request: Request) {
 
 async function analyzeUrlWithOpenAI(url: string): Promise<string> {
   try {
-    console.log("Envoi de la requête OpenAI pour l'URL :", url);
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    console.log("Envoi de la requête Mistral pour l'URL :", url);
+    const response = await fetch("https://api.mistral.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Authorization": `Bearer ${process.env.MISTRAL_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: "mistral-7b",
         messages: [
           {
             role: "system",
@@ -101,29 +101,29 @@ Si l'URL respecte toutes ces normes, réponds URL OK, sinon URL suspecte, suivi 
     });
 
     if (!response.ok) {
-      console.error("Erreur réponse API OpenAI :", response.status, response.statusText);
-      throw new Error("Erreur API OpenAI");
+      console.error("Erreur réponse API mistral :", response.status, response.statusText);
+      throw new Error("Erreur API mistral");
     }
     const data = await response.json();
-    console.log("Réponse OpenAI reçue :", data);
+    console.log("Réponse mistral reçue :", data);
     return data.choices[0].message.content || "Réponse vide.";
   } catch (error: any) {
-    console.error("Erreur lors de l'appel à OpenAI :", error);
-    return "Erreur de communication avec OpenAI.";
+    console.error("Erreur lors de l'appel à mistral :", error);
+    return "Erreur de communication avec mistral.";
   }
 }
 
 async function synthesizeSummaries(summary1: string, summary2: string): Promise<string> {
   try {
     const combinedText = `${summary1}\n${summary2}`;
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://api.mistral.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Authorization": `Bearer ${process.env.MISTRAL_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: "mistral-7b",
         messages: [
           {
             role: "system",
@@ -138,14 +138,14 @@ async function synthesizeSummaries(summary1: string, summary2: string): Promise<
     });
   
     if (!response.ok) {
-      console.error("Erreur réponse API OpenAI lors de la synthèse :", response.status, response.statusText);
-      throw new Error("Erreur API OpenAI lors de la synthèse");
+      console.error("Erreur réponse API Mistral lors de la synthèse :", response.status, response.statusText);
+      throw new Error("Erreur API Mistral lors de la synthèse");
     }
     const data = await response.json();
     return data.choices[0].message.content || "Résumé vide.";
   } catch (error: any) {
-    console.error("Erreur lors de l'appel à OpenAI pour la synthèse :", error);
-    return "Erreur de communication avec OpenAI lors de la synthèse.";
+    console.error("Erreur lors de l'appel à Mistral pour la synthèse :", error);
+    return "Erreur de communication avec Mistral lors de la synthèse.";
   }
 }
 
